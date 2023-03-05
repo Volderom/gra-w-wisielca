@@ -1,59 +1,44 @@
-import time
+import random
 
-# Zdefiniuj funkcję opisującą pole walki
-def pole_walki():
-    print("Jesteś na polu walki!")
-    time.sleep(1)
-    print("Znajdujesz się w walce z przeciwnikiem.")
-    time.sleep(1)
-    print("...")
-    time.sleep(2)
-    print("Pokonałeś przeciwnika!")
-    time.sleep(1)
+# lista słów do odgadnięcia
+slowo_lista = ["kot", "pies", "samochód", "telewizor", "laptop", "komputer"]
 
-# Zdefiniuj funkcję opisującą zagadkę
-def zagadka():
-    print("Znajdujesz się w pokoju z zagadką.")
-    time.sleep(1)
-    print("...")
-    time.sleep(2)
-    print("Zagadka brzmi:")
-    time.sleep(1)
-    print("Co ma klawiatura bez klawiszy?")
-    time.sleep(1)
-    odpowiedz = input("Podaj odpowiedź: ")
-    if odpowiedz.lower() == "komputer":
-        print("Brawo, odgadłeś zagadkę!")
-        time.sleep(1)
+# losowanie słowa
+slowo = random.choice(slowo_lista)
+
+# zmienna przechowująca zgadnięte litery
+zgadniete_litery = []
+
+# liczba prób
+liczba_prob = 10
+
+# pętla główna gry
+while liczba_prob > 0:
+    # wyświetlenie zgadniętych liter i ukrytych znaków
+    for litera in slowo:
+        if litera in zgadniete_litery:
+            print(litera, end=" ")
+        else:
+            print("_", end=" ")
+    print()
+
+    # pobranie litery od gracza
+    litera_zgadywana = input("Podaj literę: ")
+
+    # sprawdzenie, czy litera jest w słowie
+    if litera_zgadywana in slowo:
+        zgadniete_litery.append(litera_zgadywana)
+        print("Brawo, zgadłeś literę!")
     else:
-        print("Niestety, to niepoprawna odpowiedź.")
-        time.sleep(1)
+        liczba_prob -= 1
+        print("Niestety, ta litera nie występuje w słowie.")
+        print(f"Pozostało Ci {liczba_prob} prób.")
 
-# Zdefiniuj funkcję opisującą lokację
-def lokacja(nazwa_lokacji):
-    print(f"Jesteś w {nazwa_lokacji}.")
-    time.sleep(1)
-    wybor = input("Co chcesz zrobić? ")
-    if wybor.lower() == "walka":
-        pole_walki()
-    elif wybor.lower() == "zagadka":
-        zagadka()
-    else:
-        print("Niepoprawny wybór.")
-        time.sleep(1)
+    # sprawdzenie, czy gracz odgadł słowo
+    if set(slowo) <= set(zgadniete_litery):
+        print(f"Brawo, odgadłeś słowo! To było: {slowo}")
+        break
 
-# Rozpocznij grę
-print("Witaj w grze przygodowej!")
-time.sleep(1)
-print("...")
-time.sleep(2)
-print("Jesteś w środku mrocznego lasu.")
-time.sleep(1)
-
-# Pętla gry
-while True:
-    lokacja("mroczny las")
-    lokacja("podziemia")
-    lokacja("wieża czarodzieja")
-    print("Gratulacje, udało Ci się przejść grę!")
-    break
+# jeśli gracz nie odgadł słowa w czasie, to przegrał
+if liczba_prob == 0:
+    print(f"Nie udało Ci się odgadnąć słowa. To było: {slowo}")
