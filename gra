@@ -1,0 +1,59 @@
+import time
+
+# Zdefiniuj funkcję opisującą pole walki
+def pole_walki():
+    print("Jesteś na polu walki!")
+    time.sleep(1)
+    print("Znajdujesz się w walce z przeciwnikiem.")
+    time.sleep(1)
+    print("...")
+    time.sleep(2)
+    print("Pokonałeś przeciwnika!")
+    time.sleep(1)
+
+# Zdefiniuj funkcję opisującą zagadkę
+def zagadka():
+    print("Znajdujesz się w pokoju z zagadką.")
+    time.sleep(1)
+    print("...")
+    time.sleep(2)
+    print("Zagadka brzmi:")
+    time.sleep(1)
+    print("Co ma klawiatura bez klawiszy?")
+    time.sleep(1)
+    odpowiedz = input("Podaj odpowiedź: ")
+    if odpowiedz.lower() == "komputer":
+        print("Brawo, odgadłeś zagadkę!")
+        time.sleep(1)
+    else:
+        print("Niestety, to niepoprawna odpowiedź.")
+        time.sleep(1)
+
+# Zdefiniuj funkcję opisującą lokację
+def lokacja(nazwa_lokacji):
+    print(f"Jesteś w {nazwa_lokacji}.")
+    time.sleep(1)
+    wybor = input("Co chcesz zrobić? ")
+    if wybor.lower() == "walka":
+        pole_walki()
+    elif wybor.lower() == "zagadka":
+        zagadka()
+    else:
+        print("Niepoprawny wybór.")
+        time.sleep(1)
+
+# Rozpocznij grę
+print("Witaj w grze przygodowej!")
+time.sleep(1)
+print("...")
+time.sleep(2)
+print("Jesteś w środku mrocznego lasu.")
+time.sleep(1)
+
+# Pętla gry
+while True:
+    lokacja("mroczny las")
+    lokacja("podziemia")
+    lokacja("wieża czarodzieja")
+    print("Gratulacje, udało Ci się przejść grę!")
+    break
